@@ -1,7 +1,7 @@
 <?php
 include('classes/server.php');
 
-if (isset($_POST['Register'])) {
+if (isset($_POST['register'])) {
         $name = $_POST['name'];
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -35,7 +35,7 @@ if (isset($_POST['Register'])) {
             <i>Register
         </div>
 
-        <form>
+        <form action="registration.php" method="post">
             <div class="input">
                 <div class="input-addon">
                     <i class="material-icons">face</i>
@@ -73,7 +73,7 @@ if (isset($_POST['Register'])) {
                 <span style="color: #DDD">I accept Terms of Service</span>
             </div>
 
-            <input type="submit" value="Register" />
+            <input type="submit" value="Register" name="register"/>
         </form>
 
         <div class="privacy">
