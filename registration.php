@@ -1,17 +1,5 @@
 <?php
-include('classes/server.php');
-
-if (isset($_POST['register'])) {
-        $name = $_POST['name'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $email = $_POST['email'];
-
-        DB::query('INSERT INTO user VALUES (\'\', :name, :username, :password, :email)', array(':name'=>$name, ':email'=>$email, ':username'=>$username, ':password'=>$password, ));
-        echo "Success!";
-
-}
-
+include('insert_user.php');
 ?>
 
 
@@ -47,7 +35,7 @@ if (isset($_POST['register'])) {
                 <div class="input-addon">
                     <i class="material-icons">email</i>
                 </div>
-                <input id="email" placeholder="Email" name="email" type="email" required class="validate" autocomplete="off">
+                <input id="email" placeholder="Email" name="email" type="email" value="<?php echo $email; ?>" required class="validate" autocomplete="off">
             </div>
 
             <div class="clearfix"></div>
@@ -56,7 +44,7 @@ if (isset($_POST['register'])) {
                 <div class="input-addon">
                     <i class="material-icons">face</i>
                 </div>
-                <input id="username" placeholder="Username" name="username" type="text" required class="validate" autocomplete="off">
+                <input id="username" placeholder="Username" name="username" value="<?php echo $username; ?>" type="text" required class="validate" autocomplete="off">
             </div>
 
             <div class="clearfix"></div>
