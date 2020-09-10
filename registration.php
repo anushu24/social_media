@@ -20,6 +20,12 @@
         <form>
             <div class="input">
                 <div class="input-addon">
+                    <i class="material-icons">face</i>
+                </div>
+                <input id="name" placeholder="Name" type="text" required class="validate" autocomplete="off">
+            </div>
+            <div class="input">
+                <div class="input-addon">
                     <i class="material-icons">email</i>
                 </div>
                 <input id="email" placeholder="Email" type="email" required class="validate" autocomplete="off">
