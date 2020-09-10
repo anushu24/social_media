@@ -1,3 +1,32 @@
+<?php
+include 'connection.php';
+  if(isset($_POST['register']))
+  {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $usersearch ="select * from usera where username='$username'";
+    $query= mysqli_query($conn,$usersearch);
+
+    $usercount = mysqli_num_rows($query);
+
+    if($usercount){
+      $userpass = mysqli_fetch_assoc($query);
+      $dbpass= $userpass['password'];
+      $passdecode = password_verify($password,$dbpass);
+
+      if($passdecode){
+        ?>
+        <script>alert("login sucess");</script>
+        <?php
+      }else{
+        echo "password incorrect";
+      }
+    }else{
+        echo "invalid username";
+      }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,12 +42,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="glider.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.css" />
   </head>
   <body>
-
-    
-
       <header class="hero-container">
         <div class="left">
           
@@ -27,12 +53,12 @@
             <i>Log in to see videos photos of your friends</i>
         </div>
 
-        <form>
+        <form action="login.php" method="post">
             <div class="input">
                 <div class="input-addon">
                     <i class="material-icons">face</i>
                 </div>
-                <input id="username" placeholder="Username" type="text" required class="validate" autocomplete="off">
+                <input id="username" placeholder="Username" name="username"  type="text" required class="validate" autocomplete="off">
             </div>
 
             <div class="clearfix"></div>
@@ -41,7 +67,7 @@
                 <div class="input-addon">
                     <i class="material-icons">vpn_key</i>
                 </div>
-                <input id="password" placeholder="Password" type="password" required class="validate" autocomplete="off">
+                <input id="password" placeholder="Password" name="password" type="password" required class="validate" autocomplete="off">
             </div>
 
             <div class="remember-me">
@@ -49,7 +75,7 @@
                 <span style="color: #DDD">Remember Me</span>
             </div>
 
-            <input type="submit" value="Log In" />
+            <input type="submit" value="Log In" name="register" />
         </form>
 
         <div class="forgot-password">
@@ -61,7 +87,7 @@
 
         <div class="register">
             Don't have an account yet?
-            <a href="registration.html"><button id="register-link">Register here</button></a>
+            <a href="index.php"><button id="register-link">Register here</button></a>
         </div>
     </div>
         </div>  

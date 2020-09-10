@@ -82,6 +82,8 @@ input[type=password]:focus {
     border: 1px solid #373b3d;
 }
 
+
+
 input[type=email] {
     color: #949494;
     margin: 0;
