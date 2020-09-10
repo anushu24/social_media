@@ -23,7 +23,7 @@ if (isset($_POST['register'])) {
            if(preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)){
            if($pass === $cnfpass){
             if(strlen($password)>=4 && strlen($cnfpassword)<=8){
-         $sql = "insert into user( name, username, email, password, confirmpassword) values(' $name','  $username','$email','$pass','  $cnfpass')";       
+         $sql = "insert into usera( name, username, email, password, confirmpassword) values(' $name','  $username','$email','$pass','  $cnfpass')";       
          $execute= mysqli_query($conn,$sql);
          if($execute)
          {

@@ -1,16 +1,17 @@
 <?php
 include 'connection.php';
-  if(isset($_POST['register']))
+
+ if(isset($_POST['register']))
   {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $usersearch ="select * from usera where username='$username'";
     $query= mysqli_query($conn,$usersearch);
-
+    $usercount=0;
     $usercount = mysqli_num_rows($query);
 
-    if($usercount){
+    if($usercount!=0){
       $userpass = mysqli_fetch_assoc($query);
       $dbpass= $userpass['password'];
       $passdecode = password_verify($password,$dbpass);
@@ -19,14 +20,33 @@ include 'connection.php';
         ?>
         <script>alert("login sucess");</script>
         <?php
-      }else{
+      }
+      else{
         echo "password incorrect";
       }
-    }else{
-        echo "invalid username";
+    }
+    else{
+       echo "invalid username";
       }
   }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,7 +107,7 @@ include 'connection.php';
 
         <div class="register">
             Don't have an account yet?
-            <a href="index.php"><button id="register-link">Register here</button></a>
+            <a href="registration.php"><button id="register-link">Register here</button></a>
         </div>
     </div>
         </div>  
