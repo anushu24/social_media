@@ -1,9 +1,3 @@
-<?php
-include('insert_user.php');
-?>
-
-
-
 <html>
 
 <head>
@@ -12,7 +6,7 @@ include('insert_user.php');
     <meta name="description" content="Login - Register Template">
     <meta name="author" content="Lorenzo Angelino aka MrLolok">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="registration.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
 </head>
@@ -20,22 +14,15 @@ include('insert_user.php');
 <body>
     <div id="container-register">
         <div id="title">
-            <i>Register
+            <i>Registration
         </div>
 
-        <form action="registration.php" method="post">
-            <div class="input">
-                <div class="input-addon">
-                    <i class="material-icons">face</i>
-                </div>
-                <input id="name" placeholder="Name" name="name" type="text" required class="validate" autocomplete="off">
-            </div>
-
+        <form>
             <div class="input">
                 <div class="input-addon">
                     <i class="material-icons">email</i>
                 </div>
-                <input id="email" placeholder="Email" name="email" type="email" value="<?php echo $email; ?>" required class="validate" autocomplete="off">
+                <input id="email" placeholder="Email" type="email" required class="validate" autocomplete="off">
             </div>
 
             <div class="clearfix"></div>
@@ -44,7 +31,7 @@ include('insert_user.php');
                 <div class="input-addon">
                     <i class="material-icons">face</i>
                 </div>
-                <input id="username" placeholder="Username" name="username" value="<?php echo $username; ?>" type="text" required class="validate" autocomplete="off">
+                <input id="username" placeholder="Username" type="text" required class="validate" autocomplete="off">
             </div>
 
             <div class="clearfix"></div>
@@ -53,7 +40,7 @@ include('insert_user.php');
                 <div class="input-addon">
                     <i class="material-icons">vpn_key</i>
                 </div>
-                <input id="password" placeholder="Password" name="password" type="password" required class="validate" autocomplete="off">
+                <input id="password" placeholder="Password" type="password" required class="validate" autocomplete="off">
             </div>
 
             <div class="remember-me">
@@ -61,7 +48,7 @@ include('insert_user.php');
                 <span style="color: #DDD">I accept Terms of Service</span>
             </div>
 
-            <input type="submit" value="Register" name="register"/>
+            <input type="submit" value="Register" />
         </form>
 
         <div class="privacy">
@@ -70,7 +57,7 @@ include('insert_user.php');
 
         <div class="register">
             Do you already have an account?
-            <a href="login.php"><button id="register-link">Log In here</button></a>
+            <a href="login.html"><button id="register-link">Log In here</button></a>
         </div>
     </div>
 </body>
