@@ -1,52 +1,26 @@
 <?php
 include 'connection.php';
-
- if(isset($_POST['register']))
+  if(isset($_POST['register']))
   {
-    $username = $_POST['username'];
+    $useremail = $_POST['useremail'];
     $password = $_POST['password'];
+    $password=md5($password);
 
-    $usersearch ="select * from usera where username='$username'";
+    $usersearch ="select * from user_login where email= '$useremail' AND password='$password' ";
     $query= mysqli_query($conn,$usersearch);
-    $usercount=0;
-    $usercount = mysqli_num_rows($query);
 
-    if($usercount!=0){
-      $userpass = mysqli_fetch_assoc($query);
-      $dbpass= $userpass['password'];
-      $passdecode = password_verify($password,$dbpass);
-
-      if($passdecode){
-        ?>
-        <script>alert("login sucess");</script>
-        <?php
-      }
-      else{
-        echo "password incorrect";
-      }
+    if( mysqli_num_rows($query) !=0)
+    {
+      session_start();
+      $_SESSION['useremail']=$useremail;
+      header("location: home.php");
     }
-    else{
-       echo "invalid username";
+    else
+    {
+        echo "invalid useremail";
       }
   }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -78,7 +52,7 @@ include 'connection.php';
                 <div class="input-addon">
                     <i class="material-icons">face</i>
                 </div>
-                <input id="username" placeholder="Username" name="username"  type="text" required class="validate" autocomplete="off">
+                <input id="username" placeholder="Email" name="useremail"  type="email" required class="validate" autocomplete="off">
             </div>
 
             <div class="clearfix"></div>
@@ -107,7 +81,7 @@ include 'connection.php';
 
         <div class="register">
             Don't have an account yet?
-            <a href="registration.php"><button id="register-link">Register here</button></a>
+            <a href="index.php"><button id="register-link">Register here</button></a>
         </div>
     </div>
         </div>  
