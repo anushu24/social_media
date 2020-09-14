@@ -1,13 +1,13 @@
 <?php
+include 'connection.php';
 session_start();
-if (!isset($_SESSION['useremail'])){
+if (!isset($_SESSION['id'])){
 header('location:login.php');
 }
-$session_email = $_SESSION['useremail'];
-$session_query = $conn->query("select * from user_login where user_email = '$session_email'");
-$user_row = $session_query->fetch();
-$session_id = $user_row['id'];
-$session_username = $user_row['user_name'];
+$session_id = $_SESSION['id'];
+$session_query = "select * from user_login where user_id = '$session_id'";
+$query = mysqli_query($conn,$session_query);
+$user_row = mysqli_fetch_assoc($query);
+$session_username = $user_row['name'];
 
 ?>
-

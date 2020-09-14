@@ -1,3 +1,27 @@
+<?php
+include 'connection.php';
+  if(isset($_POST['register']))
+  {
+    $useremail = $_POST['useremail'];
+    $password = $_POST['password'];
+    $password=md5($password);
+
+    $usersearch ="select * from user_login where user_email= '$useremail' AND password='$password' ";
+    $query= mysqli_query($conn,$usersearch);
+    if( mysqli_num_rows($query) !=0)
+    {
+      $row = mysqli_fetch_assoc($query);
+      session_start();
+      $_SESSION['id'] = $row['user_id'];
+      $_SESSION['useremail']=$useremail;
+      header("location: home.php");
+    }
+    else
+    {
+        echo "invalid useremail";
+      }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,12 +37,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="glider.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.css" />
   </head>
   <body>
 
-    
-
+  
       <header class="hero-container">
         <div class="left">
           
@@ -27,7 +50,7 @@
             <i>Log in to see videos photos of your friends</i>
         </div>
 
-        <form>
+        <form action="login.php" method="post">
             <div class="input">
                 <div class="input-addon">
                     <i class="material-icons">face</i>
