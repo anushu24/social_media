@@ -7,7 +7,5 @@
   if(!$conn){
       echo "no connection";
   }
- else{
-    echo "success";
-} 
+ 
   ?>

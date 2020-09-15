@@ -1,3 +1,36 @@
+<?php
+include 'connection.php';
+session_start();
+if (!isset($_SESSION['id'])){
+header('location:login.php');
+}
+?>
+
+<?php
+ if(isset($_POST['post_upload']))
+  {
+
+    $user_id = $_SESSION['id'];
+    $user_email = $_SESSION['useremail'];
+    $username = $_SESSION['username'];
+    $caption = $_POST['caption'];
+    $post_date = date("yy-m-d");
+    $upload_file = $_FILES['photo'];
+    $location = $upload_file['tmp_name'];
+    $name = $upload_file['name'];
+    $url = "./images/posts/".$name;
+    move_uploaded_file($location, $url);
+
+
+    $q = "INSERT INTO posts (user_id, user_email, user_name, caption, post_date, post_url) VALUES ('$user_id', '$user_email' , '$username', '$caption', '$post_date', '$url')"; 
+    $query= mysqli_query($conn,$q);
+    if($query){
+        echo "<script> alert('success'); </script>";
+    }
+    
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,6 +134,7 @@
                         
                         <!-- START OF STATUS -->
                         <!-- Start of post an content -->
+                        <form method="post" action="home.php" enctype="multipart/form-data">
                         <div class="main mainpost" style="margin-bottom:20px; padding-bottom:10px; width: 700px; margin-left: -70px;">    
 
                             <div class="userimg"><img src="../images/profile/upload.png"/>
@@ -108,24 +142,28 @@
                             <div class="username">               <p class="name" style="top:15px;">user name</p>
                             </div>
                             <p class="quotes">
-                                <textarea id="mypara" placeholder="Share an article ,photo ,video or idea."></textarea>
+                                <textarea id="mypara" name="caption" placeholder="Share an article ,photo ,video or idea."></textarea>
                             </p>
                             <!-- image load to post -->
-                            <div class="post">
-                                <img id="load2" class="postimg" src=" "/>
+                            <div class="post d-none" id="post_preview">
+                                <div id="preview_div">
+                                    
+                                </div>
                             </div>
 
                             <div class="postbar">
-                                <input type="file" accept="images/*" id="chooseimg" onchange="loadFile(event)" onmouseover="onbuttoncolor()" onmouseout="outbuttoncolor()"/>
+                                <input type="file" name="photo" accept="images/*" id="chooseimg" onchange="preview()"/>
                                 <button type="button" class="imgbttn" id="imgbttn">&#x1f4f7; Images</button>
-                                <button type="button" id="postmypost" class="postmypost" onclick="mypost();">Post</button>
+                                <button name="post_upload" type="submit" id="postmypost" class="postmypost">Post</button>
                             </div>
 
                         </div>
+                        </form>
                         <!-- End of post an content -->
                         <!-- END OF STATUS -->
 
                         <!-- START OF POSTS -->
+
                         <div class="d-flex flex-column mt-4 mb-4">
 
                             <div class="card" style="width: 700px; margin-left: -70px;">
@@ -195,7 +233,6 @@
                                 <span class="profile-info-name">Coding Venue</span>
                             </div>
                         </div> 
-
                         <div class="mt-4">
                             <div class="d-flex flex-row justify-content-between">
                                 <small class="text-muted font-weight-normal" >Suggestions For You</small>
@@ -238,7 +275,6 @@
                                     <button class="btn btn-primary btn-sm p-0 btn-ig">Follow</button>
                                 </div>
                             </div>
-
                                 
                             End of right section suggestion user 
                         
@@ -251,10 +287,8 @@
     </div>
     </div>
 
-</body>
-
-<footer>
     <!-- JS, Popper.js, and jQuery -->
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -264,6 +298,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-</footer>
+    <script type="text/javascript" src="./js/main.js"></script>    
+</body>
+
+
 
 </html>

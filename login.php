@@ -6,13 +6,17 @@ include 'connection.php';
     $password = $_POST['password'];
     $password=md5($password);
 
-    $usersearch ="select * from user_login where email= '$useremail' AND password='$password' ";
+    $usersearch ="select * from users where user_email= '$useremail' AND password='$password' ";
     $query= mysqli_query($conn,$usersearch);
-
     if( mysqli_num_rows($query) !=0)
     {
+      $row = mysqli_fetch_assoc($query);
       session_start();
+      $_SESSION['id'] = $row['user_id'];
       $_SESSION['useremail']=$useremail;
+      $_SESSION['fname'] = $row['name'];
+      $_SESSION['username'] = $row['user_name'];
+      
       header("location: home.php");
     }
     else
@@ -81,7 +85,7 @@ include 'connection.php';
 
         <div class="register">
             Don't have an account yet?
-            <a href="index.php"><button id="register-link">Register here</button></a>
+            <a href="registration.php"><button id="register-link">Register here</button></a>
         </div>
     </div>
         </div>  

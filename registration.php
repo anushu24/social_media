@@ -10,7 +10,7 @@ if (isset($_POST['register'])) {
         $pass = md5($password);
         $cnfpass=md5($cnfpassword);
 
-        $emailquery = " select * from user_login where email='$email' ";
+        $emailquery = " select * from users where email='$email' ";
         $query = mysqli_query($conn,$emailquery);
         $emailcount=mysqli_num_rows($query);
         if($emailcount>0){
@@ -23,7 +23,7 @@ if (isset($_POST['register'])) {
            if(preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)){
            if($pass === $cnfpass){
             if(strlen($password)>=4 && strlen($cnfpassword)<=8){
-         $sql = "insert into user_login( name, username, email, password, confirmpassword) values(' $name','  $username','$email','$pass','  $cnfpass')";       
+         $sql = "insert into users( name, username, email, password, confirmpassword) values(' $name','  $username','$email','$pass','  $cnfpass')";       
          $execute= mysqli_query($conn,$sql);
          if($execute)
          {
