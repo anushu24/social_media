@@ -1,3 +1,23 @@
+<?php
+include 'connection.php';
+session_start();
+if (!isset($_SESSION['email'])){
+header('location:login.php');
+}
+
+$username = $_SESSION['username'];
+$bio = $_SESSION['bio'];
+$url = $_SESSION['url'];
+$followers = "SELECT nooffollowers FROM table WHERE email= $_SESSION['email']";
+$following = "SELECT nooffollowing FROM table WHERE email= $_SESSION['email']";
+
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,28 +25,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="author" content="George W. Park">
-    <meta name="description" content="This project demonstrates how CSS grid (with flexbox and float fallback) can be used to re-create the layout of an Instagram profile page.">
 
-    <!-- Title -->
     <title>Profile Page</title>
 
-    <!-- External CSS Files -->
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
-
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 <body>
-
 
 <div style="font-size: 20px;" >
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,40 +50,60 @@
 </nav>
 </div>
 
+
     <header style="border-bottom: 2px solid rgb(186 186 186);" >
         <div class="container">
             <div class="profile">
                 <div class="profile-image">
-                    <img src="./images/About.png" alt="About">
+                    <img src=" <?php echo "$url"; ?>" alt="Profile Pic">
                 </div>
 
                 <div class="profile-user-settings">
-                    <h1 class="profile-user-name">user_name</h1>
-                    <button style="font-size: 15px;" class="btn profile-edit-btn">Edit Profile</button>
-                    <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+                    <h1 class="profile-user-name"> <?php echo "$username"; ?></h1>
+                    <a href="editprofile.php" class="btn profile-edit-btn">Edit Profile</a>
                 </div>
 
                 <div class="profile-stats">
 
                     <ul>
-                        <li><span class="profile-stat-count">164</span> posts</li>
-                        <li><span class="profile-stat-count">188</span> followers</li>
-                        <li><span class="profile-stat-count">206</span> following</li>
+                        <li><span class="profile-stat-count"> <?php echo "$nooffollowers" ?> </span> followers</li>
+                        <li><span class="profile-stat-count"> <?php echo "$nooffollowing" ?> </span> following</li>
                     </ul>
                 </div>
                 <div class="profile-bio">
 
-                    <p>BIO:         </p>
+                    <p> <?php echo "$bio"; ?> </p>
                     
                 </div>
             </div>
-         </div>
+        </div>
     </header>
 
 
 
+<main>
+    
 
 
-  
+
+    
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
+
+
+
+

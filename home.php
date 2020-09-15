@@ -9,7 +9,6 @@ header('location:login.php');
 <?php
  if(isset($_POST['post_upload']))
   {
-
     $user_id = $_SESSION['id'];
     $user_email = $_SESSION['useremail'];
     $username = $_SESSION['username'];
@@ -21,13 +20,11 @@ header('location:login.php');
     $url = "./images/posts/".$name;
     move_uploaded_file($location, $url);
 
-
     $q = "INSERT INTO posts (user_id, user_email, user_name, caption, post_date, post_url) VALUES ('$user_id', '$user_email' , '$username', '$caption', '$post_date', '$url')"; 
     $query= mysqli_query($conn,$q);
     if($query){
         echo "<script> alert('success'); </script>";
     }
-    
   }
 ?>
 
@@ -39,7 +36,6 @@ header('location:login.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d3d6f2df1f.js" crossorigin="anonymous"></script>
